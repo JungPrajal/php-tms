@@ -7,7 +7,7 @@
     <div class="card mx-auto">
         <div class="card-header bg-white">
             <h5 class="card-title text-center mb-0">Add Intro</h5>
-            <a class="btn btn-primary btn-sm " href="index.php" role="button"> Manage Intro</a>
+            <a class="btn btn-primary btn-sm" href="index.php" role="button"> Manage Intro</a>
         </div>
         <div class="card-body">
             <?php
@@ -18,15 +18,14 @@
                 $image = $_POST['image'];
 
                 if ($title != "" && $description != "" && $image != "") {
-                    $query = " INSERT INTO intro (title, description, image) VALUES ('$title', '$description', '$image')";
-                    $result = mysqli_query($con, $query);
+                    $query = "INSERT INTO intro (title, description, image) VALUES ('$title', '$description', '$image')";
+                    $result = mysqli_query($con, $query); // Connect to database
 
                     if ($result) {
-                        echo "<p class='text-success'>Data are Submitted</p>";
+                        echo "<p class='text-success'>Data has been submitted</p>";
                         header('Refresh:2; URL=index.php');
-                        // echo "<meta http-equiv=\"refresh\" content=\"0;URL=upload.php\">";
                     } else {
-                        echo "<p class='text-warning'>Data are not submitted</p>";
+                        echo "<p class='text-warning'>Data was not submitted</p>";
                         header('Refresh:2; URL=create.php');
                     }
                 } else {
@@ -47,13 +46,9 @@
                 <!-- Imgge selecion -->
                 <div class="mb-3">
                     <label for="exampleInputImage" class="form-label">Image</label>
-
                 </div>
 
-
-
                 <!-- Modal Body -->
-                <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
                 <div class="modal fade" id="modalId" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
                         <div class="modal-content">
@@ -73,9 +68,9 @@
                                 <div class="row">
                                     <?php
 
-                                    $select = "SELECT *FROM files";
+                                    $select = "SELECT * FROM files";
                                     $result = mysqli_query($con, $select);
-                                    $i = 1;
+                                    $i = 0;
                                     while ($row = mysqli_fetch_array($result)) {
                                     ?>
                                         <label class="col-lg-3 col-md-4 col-sm-6">
@@ -83,12 +78,8 @@
                                             <img src="<?php echo "../uploads/" . $row['file_link']; ?>" alt="" height="100px;" width="100px;" style="margin-right:20px;">
                                         </label>
                                     <?php
-
-
                                     }
-
                                     ?>
-
                                 </div>
                                 <!-- add block to fetch data -->
                             </div>
@@ -96,7 +87,7 @@
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                                     Close
                                 </button>
-                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="firstFunction() ">Save</button>
+                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="firstFunction()">Save</button>
                             </div>
                         </div>
                     </div>
@@ -108,30 +99,30 @@
                         document.getElementById("modalId"),
                         options,
                     );
+
+                    function firstFunction() {
+                        var selectedOption1 = document.querySelector('input[name=image1]:checked').value;
+                        var fileName = selectedOption1.split('/').pop(); // Extracts filename from path
+                        document.getElementById('selectImage').value = fileName;
+                        document.querySelector('input[name=image]').value = fileName; // Set the value for the form field
+                    }
                 </script>
 
-                <div class="mb-3">
-                    <input type="text" id="selectImage" class="form-" name="image" id="exampleInputpssword1">
-                    <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalId">
+                <div class="mb-3 d-flex">
+                    <input type="text" id="selectImage" readonly name="image" class="form-control border-end-0" />
+                    <button type="button" class="w-25 btn btn-primary border-start-0 border-0btn-sm" data-bs-toggle="modal" data-bs-target="#modalId">
                         Choose Image
                     </button>
                 </div>
 
                 <!-- Imgge selecion -->
 
-
                 <div class="mb-3">
                     <button type="submit" class="btn btn-primary" name="save">Submit</button>
                 </div>
+            </form>
         </div>
-        </form>
     </div>
 </div>
-</div>
-<script>
-    function firstFunction() {
-        var selectedOption1 = document.querySelector('input[name=image1]:checked').value;
-        document.getElementById('selectImage').value = selectedOption1; // use .innerHTML if we want data on label
-    }
-</script>
+
 <?php require('../includes/footer.php'); ?>
