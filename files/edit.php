@@ -18,7 +18,7 @@
 
             if (isset($_POST['save'])) {
                 $title = $_POST['title'];
-                $description = $_POST['description'];
+                $description = $_POST['description'];       
 
                 $file = $_FILES['dataFile']['name'];
                 $file_size = $_FILES['dataFile']['size'];

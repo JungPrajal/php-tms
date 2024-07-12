@@ -72,7 +72,8 @@
                                     $result = mysqli_query($con, $select);
                                     $i = 0;
                                     while ($row = mysqli_fetch_array($result)) {
-                                    ?>
+                                    ?> 
+                                        <!-- loop -->
                                         <label class="col-lg-3 col-md-4 col-sm-6">
                                             <input type="radio" name="image1" value="<?php echo '../uploads/' . $row['file_link']; ?>" style="opacity: 0;" />
                                             <img src="<?php echo "../uploads/" . $row['file_link']; ?>" alt="" height="100px;" width="100px;" style="margin-right:20px;">

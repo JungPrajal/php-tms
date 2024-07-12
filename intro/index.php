@@ -1,11 +1,14 @@
 <?php require('../includes/header.php'); ?>
 
 <?php require('../includes/navbar.php'); ?>
-<?php require('../includes/sidebar.php'); ?>
+
 <section>
   <div class="container py-5">
     <div class="table-responsive">
       <a class="btn btn-primary btn-sm" href="create.php" role="button"> Add</a>
+
+      <?php require('../includes/sidebar.php'); ?>
+      
       <table class="table">
         <thead>
           <tr>
